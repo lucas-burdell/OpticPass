@@ -11,6 +11,10 @@ module.exports = ({ mode } = { mode: "development" }) => ({
     mode,
     plugins: [
         new CleanWebpackPlugin(),
+        new CopyWebpackPlugin([
+            { from: path.resolve(__dirname, "./src/assets/images/") },
+            { from: path.resolve(__dirname, "./src/manifest.json") }
+        ]),
         new HtmlWebpackPlugin({
             title,
             template: path.resolve(__dirname, "./src/assets/template.html"),

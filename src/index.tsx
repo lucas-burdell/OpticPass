@@ -1,63 +1,65 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import createHmac from "create-hmac";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import { Hash } from "./Hash";
+import { useClipboard } from "Clipboard";
 
 const Container = styled.div`
     display: flex;
     align-content: center;
-    text-align: center;
 `;
 
 const ContentContainer = styled.div`
-    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
-    margin: 0 20vw;
+    margin: auto;
+    width: min(25em, 50vw);
+    padding: min(10%, 10px);
+`;
+
+const GlobalStyle = createGlobalStyle`
+    body {
+        margin: 0px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+`;
+
+const Label = styled.h4`
+    margin: 0px;
+    margin-top: 0.5em;
+`;
+
+const Input = styled.input`
+    min-width: 10em;
+    max-width: 25em;
 `;
 
 const App: React.FunctionComponent = () => {
     const [password, setPassword] = React.useState("");
     const [subject, setSubject] = React.useState("");
     const [increment, setIncrement] = React.useState("0");
-    const clipboard = React.useRef<HTMLTextAreaElement>();
+    const [ClipboardArea, copy] = useClipboard({
+        resize: "none",
+        maxWidth: "25em"
+    });
 
     const calculate = React.useCallback((password, subject, increment) => {
-        const hmac = createHmac("sha1", "password");
-        hmac.update("synchronous write");
-        hmac.write(subject);
-        hmac.write(increment);
-        const result = hmac.digest().toString("base64");
-        if (clipboard.current) {
-            clipboard.current.textContent = result;
-            clipboard.current.select();
-            clipboard.current.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            toast.success("Result copied!");
-        }
+        const result = Hash(subject, increment);
+        copy(result);
+        toast.success("Result copied!");
     }, []);
 
     return (
-        <Container
-            style={{
-                display: "flex",
-                alignContent: "center",
-                textAlign: "center"
-            }}
-        >
+        <Container>
+            <GlobalStyle />
             <ToastContainer />
-            <ContentContainer
-                style={{
-                    flex: "1",
-                    display: "flex",
-                    flexDirection: "column",
-                    padding: "min(10%, 10px)"
-                }}
-            >
-                <h3>Password</h3>
-                <input
+            <ContentContainer>
+                <Label>Password</Label>
+                <Input
                     type="password"
                     name="password"
                     autoComplete="false"
@@ -65,8 +67,8 @@ const App: React.FunctionComponent = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <h3>Subject</h3>
-                <input
+                <Label>Subject</Label>
+                <Input
                     type="text"
                     name="subject"
                     autoComplete="false"
@@ -74,8 +76,8 @@ const App: React.FunctionComponent = () => {
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                 />
-                <h3>Increment</h3>
-                <input
+                <Label>Increment</Label>
+                <Input
                     type="text"
                     name="increment"
                     autoComplete="false"
@@ -86,19 +88,22 @@ const App: React.FunctionComponent = () => {
                 <button
                     type="button"
                     onClick={() => calculate(password, subject, increment)}
+                    style={{
+                        minWidth: "10em",
+                        maxWidth: "25em",
+                        borderRadius: "5px",
+                        backgroundColor: "#0072bd",
+                        color: "white",
+                        border: "none",
+                        margin: "1em 0px",
+                        padding: "1em 1em"
+                    }}
                 >
                     Execute and Copy
                 </button>
+                <Label>Result</Label>
+                <ClipboardArea />
             </ContentContainer>
-            <textarea
-                style={{
-                    width: "0px",
-                    height: "0px",
-                    opacity: "0",
-                    borderWidth: "0px"
-                }}
-                ref={clipboard}
-            />
         </Container>
     );
 };

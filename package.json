@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "test": "",
-        "start": "webpack-dev-server",
+        "start": "webpack-dev-server --open",
         "build": "webpack --env.mode production && cp docs/index.html docs/404.html"
     },
     "author": "Lucas Burdell",

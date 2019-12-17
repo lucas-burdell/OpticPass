@@ -26,7 +26,7 @@ module.exports = ({ mode } = { mode: "development" }) => ({
     output: {
         path: path.resolve(__dirname, "./docs"),
         filename: "[name].[contenthash].js",
-        publicPath: "/"
+        publicPath: "/OpticPass/"
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],

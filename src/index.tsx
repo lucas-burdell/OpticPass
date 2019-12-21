@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import styled, { createGlobalStyle } from "styled-components";
 import { Hash } from "./Hash";
 import { useClipboard } from "Clipboard";
+import { RegisterWorker } from "./RegisterWorker";
+RegisterWorker();
 
 const Container = styled.div`
     display: flex;
@@ -41,14 +43,14 @@ const Input = styled.input`
 const App: React.FunctionComponent = () => {
     const [password, setPassword] = React.useState("");
     const [subject, setSubject] = React.useState("");
-    const [increment, setIncrement] = React.useState("0");
+    const [increment, setIncrement] = React.useState("");
     const [ClipboardArea, copy] = useClipboard({
         resize: "none",
         maxWidth: "25em"
     });
 
     const calculate = React.useCallback((password, subject, increment) => {
-        const result = Hash(subject, increment);
+        const result = Hash(password, subject, increment);
         copy(result);
         toast.success("Result copied!");
     }, []);

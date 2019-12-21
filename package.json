@@ -7,7 +7,7 @@
     "scripts": {
         "test": "",
         "start": "webpack-dev-server --open",
-        "build": "webpack --env.mode production && cp docs/index.html docs/404.html"
+        "build": "webpack --env.mode production"
     },
     "author": "Lucas Burdell",
     "license": "MIT",
@@ -23,7 +23,8 @@
         "react-spring": "^8.0.27",
         "react-toastify": "^5.4.1",
         "sha.js": "^2.4.11",
-        "styled-components": "^4.3.2"
+        "styled-components": "^4.3.2",
+        "workbox-sw": "^4.3.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.7.5",
@@ -49,6 +50,7 @@
         "url-loader": "^2.3.0",
         "webpack": "^4.41.3",
         "webpack-cli": "^3.3.9",
-        "webpack-dev-server": "^3.8.1"
+        "webpack-dev-server": "^3.8.1",
+        "workbox-webpack-plugin": "^4.3.1"
     }
 }

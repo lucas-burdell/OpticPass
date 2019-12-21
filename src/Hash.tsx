@@ -1,6 +1,6 @@
 import createHmac from "create-hmac";
-export function Hash(subject: string, increment: string) {
-    const hmac = createHmac("sha1", "password");
+export function Hash(password: string, subject: string, increment: string) {
+    const hmac = createHmac("sha1", password);
     hmac.update("synchronous write");
     hmac.write(subject);
     hmac.write(increment);

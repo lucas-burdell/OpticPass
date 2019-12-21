@@ -15,7 +15,7 @@ importScripts("/OpticPass/workbox-v4.3.1/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/OpticPass/workbox-v4.3.1"});
 
 importScripts(
-  "/OpticPass/precache-manifest.b90cf14d9abee92c842bbac43a7503f8.js"
+  "/OpticPass/precache-manifest.0c0683d1ff6cdbbac18f5b525761cb1b.js"
 );
 
 self.addEventListener('message', (event) => {

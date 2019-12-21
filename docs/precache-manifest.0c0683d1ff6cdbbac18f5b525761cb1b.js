@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "074ac694b7a6d979c08f718659bddb63",
+    "revision": "c4e25d06a3b6d9077bae55d588bdfc6f",
     "url": "/OpticPass/404.html"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/OpticPass/icons/icon-96x96.png"
   },
   {
-    "revision": "074ac694b7a6d979c08f718659bddb63",
+    "revision": "c4e25d06a3b6d9077bae55d588bdfc6f",
     "url": "/OpticPass/index.html"
   },
   {

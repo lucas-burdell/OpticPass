@@ -17,7 +17,7 @@ module.exports = ({ mode } = { mode: "development" }) => ({
         ]),
         new HtmlWebpackPlugin({
             title,
-            base: mode === "production" ? "/OpticPass" : "/",
+            base: mode === "production" ? "/OpticPass/" : "/",
             favicon: path.resolve(__dirname, "./src/favicon.ico"),
             template: path.resolve(__dirname, "./src/assets/template.html"),
             hash: true,
@@ -25,7 +25,7 @@ module.exports = ({ mode } = { mode: "development" }) => ({
         }),
         new HtmlWebpackPlugin({
             title,
-            base: mode === "production" ? "/OpticPass" : "/",
+            base: mode === "production" ? "/OpticPass/" : "/",
             favicon: path.resolve(__dirname, "./src/favicon.ico"),
             filename: "404.html",
             template: path.resolve(__dirname, "./src/assets/template.html"),
@@ -40,7 +40,7 @@ module.exports = ({ mode } = { mode: "development" }) => ({
     output: {
         path: path.resolve(__dirname, "./docs"),
         filename: "[name].[contenthash].js",
-        publicPath: mode === "production" ? "/OpticPass" : "/"
+        publicPath: mode === "production" ? "/OpticPass/" : "/"
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],

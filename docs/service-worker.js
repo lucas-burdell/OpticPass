@@ -11,11 +11,11 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("/OpticPassworkbox-v4.3.1/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "/OpticPassworkbox-v4.3.1"});
+importScripts("/OpticPass/workbox-v4.3.1/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "/OpticPass/workbox-v4.3.1"});
 
 importScripts(
-  "/OpticPassprecache-manifest.bc1d4e2e896116d682c3b2af9de64ab6.js"
+  "/OpticPass/precache-manifest.b90cf14d9abee92c842bbac43a7503f8.js"
 );
 
 self.addEventListener('message', (event) => {

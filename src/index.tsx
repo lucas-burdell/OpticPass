@@ -6,6 +6,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Hash } from "./Hash";
 import { useClipboard } from "Clipboard";
 import { RegisterWorker } from "./RegisterWorker";
+import { Encoders } from "Encoders";
 RegisterWorker();
 
 const Container = styled.div`
@@ -44,13 +45,21 @@ const App: React.FunctionComponent = () => {
     const [password, setPassword] = React.useState("");
     const [subject, setSubject] = React.useState("");
     const [increment, setIncrement] = React.useState("");
+    const [encoder, setEncoder] = React.useState<keyof typeof Encoders>(
+        "toPrintable"
+    );
     const [ClipboardArea, copy] = useClipboard({
         resize: "none",
         maxWidth: "25em"
     });
 
     const calculate = React.useCallback((password, subject, increment) => {
-        const result = Hash(password, subject, increment);
+        const result = Hash(
+            password,
+            subject,
+            increment,
+            Encoders[encoder] || Encoders.toPrintable
+        );
         copy(result);
         toast.success("Result copied!");
     }, []);
@@ -60,6 +69,18 @@ const App: React.FunctionComponent = () => {
             <GlobalStyle />
             <ToastContainer />
             <ContentContainer>
+                <Label>Encoding</Label>
+                <select
+                    style={{ maxWidth: "25em", minWidth: "10em" }}
+                    name="Encoding"
+                    onChange={(event) => {
+                        setEncoder(event.target.value as keyof typeof Encoders);
+                    }}
+                    value={encoder}
+                >
+                    <option value="toBase64">Base64</option>
+                    <option value="toPrintable">Printable</option>
+                </select>
                 <Label>Password</Label>
                 <Input
                     type="password"
